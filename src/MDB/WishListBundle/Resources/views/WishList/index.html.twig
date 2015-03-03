@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>WishList list</h1>
+
+    {% set day = '' %}
+
+    {% for entity in entities %}
+            {% if entity.createdAt|date('Y-m-d') != day %}
+{% if day != '' %}
+</tbody>
+</table>
+{% endif %}
+<h1>{{ entity.createdAt|date('Y-m-d') }}</h1>
+<table class="records_list" border="1" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Rawtitle</th>
+        <th>Source</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% set day = entity.createdAt|date('Y-m-d') %}
+    {% endif %}
+            <tr>
+                <td>{{ entity.rawTitle }}</td>
+                <td><a href="{{ entity.source }}" target="_blank">Source</a></td>
+                <td>
+                    <a href="{{ path('wishlist_delete', { 'id': entity.id }) }}">DELETE</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div></div>
+    <a href="{{ path('wishlist_new') }}">
+        Create a new entry
+    </a>
+    {% endblock %}

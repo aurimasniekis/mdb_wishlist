@@ -1,0 +1,4 @@
+mdb_wish_list:
+    resource: "@MDBWishListBundle/Resources/config/routing.xml"
+    prefix:   /
+
